@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // Card is structure of the standard card in Destiny as defined by swdestinydb
 type Card struct {
@@ -38,6 +41,9 @@ type Card struct {
 }
 
 func (c Card) String() string {
+
+	r := strings.NewReplacer(boldStart, boldReplace, boldEnd, boldReplace, italicStart, italicReplace, italicEnd, italicReplace)
+	removeRedundancy := strings.NewReplacer("````", " ", "**", " ")
 	var str string
 	if c.IsUnique {
 		switch {
@@ -70,6 +76,6 @@ func (c Card) String() string {
 	}
 	str = fmt.Sprintf("%v%v\n%v #%d.", str, c.Text, c.SetName, c.Position)
 
-	return str
+	return removeRedundancy.Replace(r.Replace(str))
 
 }
