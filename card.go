@@ -65,11 +65,11 @@ func (c Card) String() string {
 		specialDie, specialReplace,
 		focusDie, focusReplace,
 		resourceDie, resourceReplace,
-		blankDie, blankReplace,
-		oneDie, oneReplace,
-		twoDie, twoReplace,
-		threeDie, threeReplace,
-		plusDie, plusReplace)
+		blankDie, blankReplace)
+	// oneDie, oneReplace,
+	// twoDie, twoReplace,
+	// threeDie, threeReplace,
+	// plusDie, plusReplace)
 	var str string
 	if c.IsUnique {
 		switch {
@@ -97,9 +97,10 @@ func (c Card) String() string {
 	if c.TypeName == "Support" || c.TypeName == "Event" {
 		str = fmt.Sprintf("%v``%v.``Cost: %v\n", str, c.TypeName, c.Cost)
 	}
-	die := fmt.Sprintf("%v", c.Sides)
 	if c.HasDie {
-		str = fmt.Sprintf("%v%v\n", str, diceSymbolReplace.Replace(die))
+		die := diceSymbolReplace.Replace(fmt.Sprintf("%v", c.Sides))
+
+		str = fmt.Sprintf("%v%v\n", str, die)
 	}
 	str = fmt.Sprintf("%v%v\n%v #%d.", str, abilityTextReplace.Replace(c.Text), c.SetName, c.Position)
 
