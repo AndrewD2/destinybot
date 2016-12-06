@@ -42,13 +42,39 @@ type Card struct {
 
 func (c Card) String() string {
 
-	r := strings.NewReplacer(boldStart, boldReplace, boldEnd, boldReplace, italicStart, italicReplace, italicEnd, italicReplace)
+	abilityTextReplace := strings.NewReplacer(
+		boldStart, boldReplace,
+		boldEnd, boldReplace,
+		italicStart, italicReplace,
+		italicEnd, italicReplace,
+		meleeText, meleeReplace,
+		rangedText, rangedReplace,
+		shieldText, shieldReplace,
+		disruptText, disruptReplace,
+		discardText, discardReplace,
+		specialText, specialReplace,
+		resourceText, resourceReplace,
+		focusText, focusReplace)
 	removeRedundancy := strings.NewReplacer("````", " ", "**", " ")
+	diceSymbolReplace := strings.NewReplacer(
+		meleeDie, meleeReplace,
+		rangedDie, rangedReplace,
+		shieldDie, shieldReplace,
+		disruptDie, disruptReplace,
+		discardDie, discardReplace,
+		specialDie, specialReplace,
+		focusDie, focusReplace,
+		resourceDie, resourceReplace,
+		blankDie, blankReplace,
+		oneDie, oneReplace,
+		twoDie, twoReplace,
+		threeDie, threeReplace,
+		plusDie, plusReplace)
 	var str string
 	if c.IsUnique {
 		switch {
-		// case strings.Contains(strings.ToLower(c.Name), "luke"):
-		// 	str = ":luke: "
+		case strings.Contains(strings.ToLower(c.Name), "luke"):
+			str = "<:luke:255544725715550209>"
 		default:
 			str = "``•`` "
 
@@ -71,11 +97,12 @@ func (c Card) String() string {
 	if c.TypeName == "Support" || c.TypeName == "Event" {
 		str = fmt.Sprintf("%v``%v.``Cost: %v\n", str, c.TypeName, c.Cost)
 	}
+	die := fmt.Sprintf("%v", c.Sides)
 	if c.HasDie {
-		str = fmt.Sprintf("%v%v\n", str, c.Sides)
+		str = fmt.Sprintf("%v%v\n", str, diceSymbolReplace.Replace(die))
 	}
-	str = fmt.Sprintf("%v%v\n%v #%d.", str, c.Text, c.SetName, c.Position)
+	str = fmt.Sprintf("%v%v\n%v #%d.", str, abilityTextReplace.Replace(c.Text), c.SetName, c.Position)
 
-	return removeRedundancy.Replace(r.Replace(str))
+	return removeRedundancy.Replace(str)
 
 }

@@ -113,6 +113,8 @@ func (my *MyStruct) messageCreate(s *discordgo.Session, m *discordgo.MessageCrea
 	if m.Author.ID == BotID {
 		return
 	}
+
+	fmt.Println(m.Content)
 	var x string
 	var search []Card
 	// If the message is "ping" reply with "Pong!"
