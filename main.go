@@ -58,29 +58,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error: %s\n", err)
 	}
-	// log.Printf("Result: %#v\n", msg)
-
-	// for k := range cards {
-	// cards[k].Text = strings.Replace(cards[k].Text, "<b>", "``", -1)
-	// cards[k].Text = strings.Replace(cards[k].Text, "</b>", "``", -1)
-	// cards[k].Text = strings.Replace(cards[k].Text, "<i>", "*", -1)
-	// cards[k].Text = strings.Replace(cards[k].Text, "</i>", "*", -1)
-	// cards[k].Text = strings.Replace(cards[k].Text, "[ranged]", ":zranged:", -1)
-	// cards[k].Text = strings.Replace(cards[k].Text, "[melee]", ":zmelee", -1)
-	// cards[k].Text = strings.Replace(cards[k].Text, "[special]", ":zspecial", -1)
-
-	// for s := range cards[k].Sides {
-	// 	cards[k].Sides[s] = strings.Replace(cards[k].Sides[s], "RD", ":zranged:", -1)
-	// 	cards[k].Sides[s] = strings.Replace(cards[k].Sides[s], "R", ":zresource:", -1)
-	// 	cards[k].Sides[s] = strings.Replace(cards[k].Sides[s], "MD", ":zmelee:", -1)
-	// 	cards[k].Sides[s] = strings.Replace(cards[k].Sides[s], "Dc", ":zdiscard:", -1)
-	// 	cards[k].Sides[s] = strings.Replace(cards[k].Sides[s], "Dr", ":zdisrupt:", -1)
-	// 	cards[k].Sides[s] = strings.Replace(cards[k].Sides[s], "F", ":zfocus:", -1)
-	// 	cards[k].Sides[s] = strings.Replace(cards[k].Sides[s], "Sh", ":zshield:", -1)
-	// 	cards[k].Sides[s] = strings.Replace(cards[k].Sides[s], "Sp", ":zspecial", -1)
-
-	// }
-	// }
 
 	for _, v := range cards {
 		x := fmt.Sprintf("%v%03d", v.SetCode, v.Position)
